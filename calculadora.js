@@ -3,44 +3,56 @@ const readline = require("readline");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
-
 });
 
-rl.question("Digite o Primeiro número:", function (num1){
-    rl.question("Qual operação você quer EXECUTAR (+, -, *, /):",function(op){
-        rl.question("Digite o Segundo número:", function(num2){
-        
-            num1 = parseFloat(num1.replace(",", "."));
-            num2 = parseFloat(num2.replace(",", "."));
 
-            if(op === "+"){
-                resultado = num1 + num2;
-            }
+function calculadora() {
+    rl.question("Digite o primeiro numero: ", function(num1) {
+        rl.question("Qual operacao voce quer (+, -, *, /): ", function(op) {
+            rl.question("Digite o segundo numero: ", function(num2) {
+                
+                
+                num1 = parseFloat(num1.replace(",", "."));
+                num2 = parseFloat(num2.replace(",", "."));
 
-            else if(op === "*"){
-                resultado = num1 * num2;
-            }
+                let resultado;
 
-            else if(op === "-"){
-                resultado = num1 - num2;
-            }
-
-            else if(op == "/") {
-                if(num2 ===0){
-                    resultado = "Não existe duvisão por zero";
+                if(op === "+"){
+                    resultado = num1 + num2;
+                }
+                else if(op === "-"){
+                    resultado = num1 - num2;
+                }
+                else if(op === "*"){
+                    resultado = num1 * num2;
+                }
+                else if(op === "/"){
+                    if(num2 === 0){
+                        resultado = "Nao existe divisao por zero";
+                    } else {
+                        resultado = num1 / num2;
+                    }
                 }
                 else {
-                    resultado = num1 / num2
+                    resultado = "Operacao invalida";
                 }
-            }
 
-            else{
-                resultado = "Operação Inválida";
-            }
+                console.log("Resultado = " + resultado);
 
-            console.log("Resultado = " + resultado);
-
-            rl.close();
+                
+                rl.question("Quer fazer outra operacao? (s/n): ", function(resposta) {
+                    if (resposta.toLowerCase() === "s") {
+                        // reinicia a calculadora
+                        calculadora();
+                    } else {
+                        console.log("Programa finalizado!");
+                        rl.close();
+                    }
+                });
+            });
         });
     });
-});
+}
+
+
+calculadora();
