@@ -42,7 +42,7 @@ function calculadora() {
                 
                 rl.question("Quer fazer outra operacao? (s/n): ", function(resposta) {
                     if (resposta.toLowerCase() === "s") {
-                        // reinicia a calculadora
+                        
                         calculadora();
                     } else {
                         console.log("Programa finalizado!");
